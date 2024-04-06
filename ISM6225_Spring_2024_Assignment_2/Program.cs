@@ -22,14 +22,16 @@ namespace ISM6225_Spring_2024_Assignment_2
 
             //Question 2:
             Console.WriteLine("Question 2:");
-            int[] nums2 = { 0, 1, 0, 3, 12 };
+            //int[] nums2 = { 0, 1, 0, 3, 12 };
+            int[] nums2 = { 0, 1, 0, 3, 12, 4, 1, 4, 0, 6 };
             IList<int> resultAfterMovingZero = MoveZeroes(nums2);
             string combinationsString = ConvertIListToArray(resultAfterMovingZero);
             Console.WriteLine(combinationsString);
 
             //Question 3:
             Console.WriteLine("Question 3:");
-            int[] nums3 = { -1, 0, 1, 2, -1, -4 };
+            //int[] nums3 = { -1, 0, 1, 2, -1, -4 };
+            int[] nums3 = { 0, 1, 2, -2 };
             IList<IList<int>> triplets = ThreeSum(nums3);
             string tripletResult = ConvertIListToNestedList(triplets);
             Console.WriteLine(tripletResult);
@@ -42,13 +44,15 @@ namespace ISM6225_Spring_2024_Assignment_2
 
             //Question 5:
             Console.WriteLine("Question 5:");
-            int binaryInput = 101010;
+            //int binaryInput = 101010;
+            int binaryInput = 101111;
             int decimalResult = BinaryToDecimal(binaryInput);
             Console.WriteLine(decimalResult);
 
             //Question 6:
             Console.WriteLine("Question 6:");
-            int[] nums5 = { 3,6,9,1 };
+            //int[] nums5 = { 3,6,9,1 };
+            int[] nums5 = { 3, 6, 12, 1 };
             int maxGap = MaximumGap(nums5);
             Console.WriteLine(maxGap);
 
@@ -60,7 +64,8 @@ namespace ISM6225_Spring_2024_Assignment_2
 
             //Question 8:
             Console.WriteLine("Question 8:");
-            string result = RemoveOccurrences("daabcbaabcbc", "abc");
+            //string result = RemoveOccurrences("daabcbaabcbc", "abc");
+            string result = RemoveOccurrences("axxxxyyyyb", "xy");
             Console.WriteLine(result);
         }
 
@@ -99,8 +104,18 @@ namespace ISM6225_Spring_2024_Assignment_2
         {
             try
             {
-                // Write your code here and you can modify the return value according to the requirements
-                return 0;
+                if (nums.Length == 0) return 0;
+                int k = 1;
+                for (int i = 1; i < nums.Length; i++)
+                {
+                    if (nums[i] != nums[i - 1])
+                    {
+                        nums[k] = nums[i];
+                        k++;
+                    }
+                }
+
+                return k;
             }
             catch (Exception)
             {
@@ -134,8 +149,24 @@ namespace ISM6225_Spring_2024_Assignment_2
         {
             try
             {
-                // Write your code here and you can modify the return value according to the requirements
-                return new List<int>();
+                if (nums == null || nums.Length < 2)
+                {
+                    return new List<int>(nums);
+                }
+
+                int insertPosition = 0;
+                for (int i = 0; i < nums.Length; i++)
+                {
+                    if (nums[i] != 0)
+                    {
+                        nums[insertPosition++] = nums[i];
+                    }
+                }
+                while (insertPosition < nums.Length)
+                {
+                    nums[insertPosition++] = 0;
+                }
+                return new List<int>(nums);
             }
             catch (Exception)
             {
@@ -185,8 +216,41 @@ namespace ISM6225_Spring_2024_Assignment_2
         {
             try
             {
-                // Write your code here and you can modify the return value according to the requirements
-                return new List<IList<int>>();
+                Array.Sort(nums);
+                List<IList<int>> result = new List<IList<int>>();
+
+                for (int i = 0; i < nums.Length - 2; i++)
+                {
+                    if (i > 0 && nums[i] == nums[i - 1])
+                    {
+                        continue;
+                    }
+
+                    int left = i + 1, right = nums.Length - 1;
+                    while (left < right)
+                    {
+                        int sum = nums[i] + nums[left] + nums[right];
+                        if (sum == 0)
+                        {
+                            result.Add(new List<int> { nums[i], nums[left], nums[right] });
+                            while (left < right && nums[left] == nums[left + 1]) left++;
+                            while (left < right && nums[right] == nums[right - 1]) right--;
+
+                            left++;
+                            right--;
+                        }
+                        else if (sum < 0)
+                        {
+                            left++;
+                        }
+                        else
+                        {
+                            right--;
+                        }
+                    }
+                }
+
+                return result;
             }
             catch (Exception)
             {
@@ -220,8 +284,23 @@ namespace ISM6225_Spring_2024_Assignment_2
         {
             try
             {
-                // Write your code here and you can modify the return value according to the requirements
-                return 0;
+                int maxConsecutiveOnes = 0;
+                int currentConsecutiveOnes = 0;
+
+                foreach (int num in nums)
+                {
+                    if (num == 1)
+                    {
+                        currentConsecutiveOnes++; // Increment count of current consecutive ones
+                        maxConsecutiveOnes = Math.Max(maxConsecutiveOnes, currentConsecutiveOnes); // Update max if current streak is larger
+                    }
+                    else
+                    {
+                        currentConsecutiveOnes = 0; // Reset current count on encountering a zero
+                    }
+                }
+
+                return maxConsecutiveOnes;
             }
             catch (Exception)
             {
@@ -256,8 +335,18 @@ namespace ISM6225_Spring_2024_Assignment_2
         {
             try
             {
-                // Write your code here and you can modify the return value according to the requirements
-                return 0;
+                int decimalValue = 0;
+                int baseValue = 1; // 2^0
+
+                while (binary > 0)
+                {
+                    int lastDigit = binary % 10; // Get the last digit of the binary number
+                    binary = binary / 10; // Remove the last digit from the binary number
+                    decimalValue += lastDigit * baseValue;
+                    baseValue = baseValue * 2; // Move to the next power of 2
+                }
+
+                return decimalValue;
             }
             catch (Exception)
             {
@@ -294,8 +383,33 @@ namespace ISM6225_Spring_2024_Assignment_2
         {
             try
             {
-                // Write your code here and you can modify the return value according to the requirements
-                return 0;
+                if (nums.Length < 2) return 0;
+
+                int min = nums.Min();
+                int max = nums.Max();
+                int bucketSize = Math.Max(1, (max - min) / (nums.Length - 1));
+                int bucketCount = (max - min) / bucketSize + 1;
+
+                List<int?> bucketMin = new List<int?>(new int?[bucketCount]);
+                List<int?> bucketMax = new List<int?>(new int?[bucketCount]);
+
+                foreach (var num in nums)
+                {
+                    int idx = (num - min) / bucketSize;
+                    if (!bucketMin[idx].HasValue || num < bucketMin[idx]) bucketMin[idx] = num;
+                    if (!bucketMax[idx].HasValue || num > bucketMax[idx]) bucketMax[idx] = num;
+                }
+
+                int maxGap = 0;
+                int previousMax = min;
+                for (int i = 0; i < bucketCount; i++)
+                {
+                    if (!bucketMin[i].HasValue) continue;
+                    maxGap = Math.Max(maxGap, bucketMin[i].Value - previousMax);
+                    previousMax = bucketMax[i].Value;
+                }
+
+                return maxGap;
             }
             catch (Exception)
             {
@@ -334,7 +448,16 @@ namespace ISM6225_Spring_2024_Assignment_2
         {
             try
             {
-                // Write your code here and you can modify the return value according to the requirements
+                Array.Sort(nums, (a, b) => b.CompareTo(a)); 
+
+                for (int i = 0; i < nums.Length - 2; i++)
+                {
+                    if (nums[i] < nums[i + 1] + nums[i + 2])
+                    {
+                        return nums[i] + nums[i + 1] + nums[i + 2];
+                    }
+                }
+
                 return 0;
             }
             catch (Exception)
@@ -388,8 +511,15 @@ namespace ISM6225_Spring_2024_Assignment_2
         {
             try
             {
-                // Write your code here and you can modify the return value according to the requirements
-                return "";
+                int index = s.IndexOf(part);
+
+                while (index != -1)
+                {
+                    s = s.Remove(index, part.Length);
+                    index = s.IndexOf(part);
+                }
+
+                return s;
             }
             catch (Exception)
             {
