@@ -22,16 +22,16 @@ namespace ISM6225_Spring_2024_Assignment_2
 
             //Question 2:
             Console.WriteLine("Question 2:");
-            //int[] nums2 = { 0, 1, 0, 3, 12 };
-            int[] nums2 = { 0, 1, 0, 3, 12, 4, 1, 4, 0, 6 };
+            int[] nums2 = { 0, 1, 0, 3, 12 };
+            //int[] nums2 = { 0, 1, 0, 3, 12, 4, 1, 4, 0, 6 };
             IList<int> resultAfterMovingZero = MoveZeroes(nums2);
             string combinationsString = ConvertIListToArray(resultAfterMovingZero);
             Console.WriteLine(combinationsString);
 
             //Question 3:
             Console.WriteLine("Question 3:");
-            //int[] nums3 = { -1, 0, 1, 2, -1, -4 };
-            int[] nums3 = { 0, 1, 2, -2 };
+            int[] nums3 = { -1, 0, 1, 2, -1, -4 };
+            //int[] nums3 = { 0, 1, 2, -2 };
             IList<IList<int>> triplets = ThreeSum(nums3);
             string tripletResult = ConvertIListToNestedList(triplets);
             Console.WriteLine(tripletResult);
@@ -44,15 +44,15 @@ namespace ISM6225_Spring_2024_Assignment_2
 
             //Question 5:
             Console.WriteLine("Question 5:");
-            //int binaryInput = 101010;
-            int binaryInput = 101111;
+            int binaryInput = 101010;
+            //int binaryInput = 101111;
             int decimalResult = BinaryToDecimal(binaryInput);
             Console.WriteLine(decimalResult);
 
             //Question 6:
             Console.WriteLine("Question 6:");
-            //int[] nums5 = { 3,6,9,1 };
-            int[] nums5 = { 3, 6, 12, 1 };
+            int[] nums5 = { 3,6,9,1 };
+            //int[] nums5 = { 3, 6, 12, 1 };
             int maxGap = MaximumGap(nums5);
             Console.WriteLine(maxGap);
 
@@ -64,8 +64,8 @@ namespace ISM6225_Spring_2024_Assignment_2
 
             //Question 8:
             Console.WriteLine("Question 8:");
-            //string result = RemoveOccurrences("daabcbaabcbc", "abc");
-            string result = RemoveOccurrences("axxxxyyyyb", "xy");
+            string result = RemoveOccurrences("daabcbaabcbc", "abc");
+            //string result = RemoveOccurrences("axxxxyyyyb", "xy");
             Console.WriteLine(result);
         }
 
@@ -104,18 +104,25 @@ namespace ISM6225_Spring_2024_Assignment_2
         {
             try
             {
-                if (nums.Length == 0) return 0;
-                int k = 1;
-                for (int i = 1; i < nums.Length; i++)
+                if (nums.Length == 0) return 0; //if array is empty return 0.
+                int k = 1; // Pointer for next unique element position.
+
+                //counting  non-duplicate values 
+                for (int i = 1; i < nums.Length; i++) 
                 {
-                    if (nums[i] != nums[i - 1])
+                    if (nums[i] != nums[i - 1]) 
                     {
                         nums[k] = nums[i];
                         k++;
                     }
                 }
+                // Optionally, fill the remainder of the array with 101 for clarity.
+                for (int i = k; i < nums.Length; i++)
+                {
+                    nums[i] = 101;
+                }
 
-                return k;
+                return k; // k is the count of unique elements.
             }
             catch (Exception)
             {
@@ -149,12 +156,13 @@ namespace ISM6225_Spring_2024_Assignment_2
         {
             try
             {
-                if (nums == null || nums.Length < 2)
+                if (nums == null || nums.Length < 2) //// Check if the array is null or has less than 2 elements
                 {
                     return new List<int>(nums);
                 }
 
                 int insertPosition = 0;
+                // Move all non-zero values to the beginning of the array.
                 for (int i = 0; i < nums.Length; i++)
                 {
                     if (nums[i] != 0)
@@ -162,11 +170,12 @@ namespace ISM6225_Spring_2024_Assignment_2
                         nums[insertPosition++] = nums[i];
                     }
                 }
+                // Fill the remaining positions with zeros.
                 while (insertPosition < nums.Length)
                 {
                     nums[insertPosition++] = 0;
                 }
-                return new List<int>(nums);
+                return new List<int>(nums); //Return the modified array as a list
             }
             catch (Exception)
             {
@@ -216,11 +225,13 @@ namespace ISM6225_Spring_2024_Assignment_2
         {
             try
             {
+                //sort the array to avoid duplicates.
                 Array.Sort(nums);
                 List<IList<int>> result = new List<IList<int>>();
-
+                // Iterate through the array to find triplets.
                 for (int i = 0; i < nums.Length - 2; i++)
                 {
+                    // Ignore duplicate values
                     if (i > 0 && nums[i] == nums[i - 1])
                     {
                         continue;
@@ -230,19 +241,26 @@ namespace ISM6225_Spring_2024_Assignment_2
                     while (left < right)
                     {
                         int sum = nums[i] + nums[left] + nums[right];
+
+                        // If the sum of the triplet is zero, add it to the result list.
                         if (sum == 0)
                         {
                             result.Add(new List<int> { nums[i], nums[left], nums[right] });
+
+                            // Skip duplicate elements after finding a valid triplet.
                             while (left < right && nums[left] == nums[left + 1]) left++;
                             while (left < right && nums[right] == nums[right - 1]) right--;
 
+                            // Move pointers inward to look for new potential triplets.
                             left++;
                             right--;
                         }
+                        // If the sum is less than zero, increment left pointer.
                         else if (sum < 0)
                         {
                             left++;
                         }
+                        // If the sum is more than zero, decrement right pointer.
                         else
                         {
                             right--;
@@ -250,7 +268,8 @@ namespace ISM6225_Spring_2024_Assignment_2
                     }
                 }
 
-                return result;
+                return result; // Return all found triplets that sum up to zero.
+
             }
             catch (Exception)
             {
@@ -337,7 +356,7 @@ namespace ISM6225_Spring_2024_Assignment_2
             {
                 int decimalValue = 0;
                 int baseValue = 1; // 2^0
-
+                // Iterate through binary number.
                 while (binary > 0)
                 {
                     int lastDigit = binary % 10; // Get the last digit of the binary number
@@ -383,33 +402,40 @@ namespace ISM6225_Spring_2024_Assignment_2
         {
             try
             {
+                // If the array has less than 2 elements, no gap can exist, so return 0.
                 if (nums.Length < 2) return 0;
 
+                // Find the minimum and maximum element in the array.
                 int min = nums.Min();
                 int max = nums.Max();
-                int bucketSize = Math.Max(1, (max - min) / (nums.Length - 1));
-                int bucketCount = (max - min) / bucketSize + 1;
+                // Calculate the size of each bucket.
+                // The maximum gap will be at least as big as (max - min) / (nums.Length - 1).
+                int b = Math.Max(1, (max - min) / (nums.Length - 1));
+                // Calculate the number of buckets needed.
+                int bCount = (max - min) / b + 1;
 
-                List<int?> bucketMin = new List<int?>(new int?[bucketCount]);
-                List<int?> bucketMax = new List<int?>(new int?[bucketCount]);
+                // Initialize lists to hold the min and max for each bucket.
+                List<int?> bMin = new List<int?>(new int?[bCount]);
+                List<int?> bMax = new List<int?>(new int?[bCount]);
 
+                // Place each number in the appropriate bucket.
                 foreach (var num in nums)
                 {
-                    int idx = (num - min) / bucketSize;
-                    if (!bucketMin[idx].HasValue || num < bucketMin[idx]) bucketMin[idx] = num;
-                    if (!bucketMax[idx].HasValue || num > bucketMax[idx]) bucketMax[idx] = num;
+                    int idx = (num - min) / b;
+                    if (!bMin[idx].HasValue || num < bMin[idx]) bMin[idx] = num;
+                    if (!bMax[idx].HasValue || num > bMax[idx]) bMax[idx] = num;
                 }
-
+                // Iterate through the buckets to find the maximum gap.
                 int maxGap = 0;
                 int previousMax = min;
-                for (int i = 0; i < bucketCount; i++)
+                for (int i = 0; i < bCount; i++)
                 {
-                    if (!bucketMin[i].HasValue) continue;
-                    maxGap = Math.Max(maxGap, bucketMin[i].Value - previousMax);
-                    previousMax = bucketMax[i].Value;
+                    if (!bMin[i].HasValue) continue;
+                    maxGap = Math.Max(maxGap, bMin[i].Value - previousMax);
+                    previousMax = bMax[i].Value;
                 }
 
-                return maxGap;
+                return maxGap; //return maximum gap
             }
             catch (Exception)
             {
@@ -448,16 +474,19 @@ namespace ISM6225_Spring_2024_Assignment_2
         {
             try
             {
+                // Sort the array in non-ascending order to compare the 1st array number with the sum of other 2
                 Array.Sort(nums, (a, b) => b.CompareTo(a)); 
 
                 for (int i = 0; i < nums.Length - 2; i++)
                 {
+                    // sum of any two sides should be greater than 3rd side to form a triangle
                     if (nums[i] < nums[i + 1] + nums[i + 2])
                     {
+                        // These sides can form a triangle, so return their perimeter
                         return nums[i] + nums[i + 1] + nums[i + 2];
                     }
                 }
-
+                // No valid triangle found
                 return 0;
             }
             catch (Exception)
@@ -511,15 +540,19 @@ namespace ISM6225_Spring_2024_Assignment_2
         {
             try
             {
+                // Find the index of the first occurrence of 'part' in 's'
                 int index = s.IndexOf(part);
 
+                // Continue looping as long as 'part' is found within 's'
                 while (index != -1)
                 {
+                    // Remove the found occurrence of 'part' from 's'
                     s = s.Remove(index, part.Length);
+                    // Search for the next occurrence of 'part'
                     index = s.IndexOf(part);
                 }
 
-                return s;
+                return s; // return the final string 's' after removing all occurrences of 'part' from 's'.
             }
             catch (Exception)
             {
