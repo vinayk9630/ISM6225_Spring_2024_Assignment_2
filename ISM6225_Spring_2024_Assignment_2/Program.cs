@@ -129,6 +129,19 @@ namespace ISM6225_Spring_2024_Assignment_2
                 throw;
             }
         }
+        /*self reflection: the task was to remove duplicates from a sorted array in-place and return the count of unique elements. 
+         * This indeed taught me the importance of array manipulation and understanding pointer manipulation for in-place modifications.
+         * The position where different elements were required to be placed was being tracked using a different pointer variable 'k'. 
+         * That way, one ensures to have managed to change the array in just one pass without using any extra space, which was allowed per the problem's constraints.
+         * The most essential point learned from this question is the importance of traversing techniques more so when the array is sorted. 
+         * Thus, it is very important to be able to use the sorted nature of the array to efficiently optimize the operations of removing duplicates. 
+         * For example, knowing how an empty array would be a handled edge case will serve in making the code robust.
+         * Would be able to further improve it, looking for alternative ways of removing duplicates, 
+         * possibly with a different time complexity or space complexity tradeoff—either using a HashSet or using two-pointer techniques. 
+         * Generally, this question made me understand the technique of array modification better and how important it is to take into consideration the constraints of the problem in order to have the most effective solutions.
+
+
+         */
 
         /*
         
@@ -182,6 +195,19 @@ namespace ISM6225_Spring_2024_Assignment_2
                 throw;
             }
         }
+        /*Self-Reflection:
+
+The second part of the problem was related to moving all zeros to the end of the array, ensuring the relative order of non-zero elements in place. It really stressed the importance of array manipulations with proficient traversal techniques.
+
+But suppose I wrote a program to move all the zeroes to the right. I wouldn't be inclined to do this in O.
+
+Returning to this question drives home the concept of in-place pointer manipulation, as in Question 1. It tries to bring out the understanding of how to deal with the elements of a similar array in such a way that the relative position is not changed, i.e. a key problem for manipulation. The only improvement that I could think of would be in the part of manipulating the array. Alternative mechanisms to perform this manipulation—say, two pointer techniques or even changing the loop conditions for more performance—have to be explored. Extra care needs to be taken while handling edge cases, like in this case, where the array contains lesser elements and yet the solution has to remain correct.
+
+In general, this was very good; it really helped one to dig deep into array manipulation and, most importantly, it instigated the understanding of the constraint of the problem while making an algorithm.
+
+I'll continue with the self-reflections for the remaining questions in subsequent responses.
+
+         */
 
         /*
 
@@ -276,6 +302,17 @@ namespace ISM6225_Spring_2024_Assignment_2
                 throw;
             }
         }
+        /*
+ Self-Reflection:
+ was to return all unique triplets in an array summing to zero. This question gave me an idea about how I could use the two-pointer technique to find the triplets without finding them repeatedly. The array being sorted is an important step in that it makes finding of the triplets smooth, as one can easily obtain the possible triplet combinations.
+
+So, handling the edge cases is inevitable, either input arrays with fewer elements or duplicate triplets. On the other side, the consideration of problem constraints—for instance, the size of the input array and its range of integer values—assisted very well while making this problem.
+
+One thing that I could work with in this code is trying the other approach that will help me get the triplets. It uses a HashSet so that I do not print any duplicate triplets. I can actually do some improvements to the loop conditions such that it's more efficient. Another thing would be learning what are the time complexities of some of the approaches that help me solve similar problems more efficiently.
+
+This question broadly helped me learn two-pointer techniques, the need for sorting arrays to enable efficient traversals, and identification of the unique combinations broadly.
+
+         */
 
         /*
 
@@ -326,7 +363,14 @@ namespace ISM6225_Spring_2024_Assignment_2
                 throw;
             }
         }
+        /*
+         * Self-Reflection:
 
+ tasked with finding the maximum number of consecutive ones in a binary array.
+
+This problem further enforces the fact that you have to search the array properly while counting the reference number one being tracked with respect to the continuous number one. In simple words, it means that after iteratively scanning the array and updating the count of one whenever one is continuous, it helped find the maximum number of consecutive ones with no extra space. This will help to give insight into handling extreme cases, like when given an array with very few elements or arrays not containing consecutive ones. Further, this will help to know the computational complexity since the problem constraints will be considered on the input size of the array given. Thus, it will be one of the best features of improving alternative ways of finding consecutive ones, which will bring improvement. This might call for the use of dynamic programming or even bitwise operations, just to check if there will be a faster way of counting. Moreover, understanding some of the implications of time complexity for differing approaches would help in efficient problem-solving. This question really helped to understand the worth of techniques for traversals of arrays and understand it quite vividly to recall the worth of considering problem constraints while deciding to form algorithms for it. Sure, let's continue with the self-reflections for the remaining questions
+
+         */
         /*
 
         Question 5:
@@ -372,6 +416,16 @@ namespace ISM6225_Spring_2024_Assignment_2
                 throw;
             }
         }
+        /*
+         Self-Reflection: required me to write a program that takes in a binary number and finds the decimal equivalent of that number using normal bitwise operators or the Math.Pow function. Here, I was to do something out of the box, coming up with a conversion using just basic arithmetic operations.
+
+This will be done by extracting the individual binary digits and updating the decimal value iteratively.
+
+Key to understand in that respect was how to handle the edge cases, for example, to cater to varied lengths of binary numbers or even those constraints over the input range. This helped in optimizing the performance of the algorithm due to the consideration of constraints from the problem, such as the size of the given input binary number.
+
+One area I could do better in: explore other avenues of converting binary to decimal, maybe using bitwise operations or recursion to see if there could be any time efficiency improvement or if more input types could be handled. It is on us to try and understand what time complexity is implied fully within different approaches when much more efficiently solving similar problems. This was an important question overall as it provided good practice in implementing arithmetic operations for number conversion and, at the same time, highlighted again the importance of having problem constraints in efficient algorithm design.
+
+*/
 
         /*
 
@@ -442,6 +496,19 @@ namespace ISM6225_Spring_2024_Assignment_2
                 throw;
             }
         }
+        /*
+         self reflection: tasked with finding the maximum difference between successive elements in a sorted array.
+
+Here is where I got the idea of bucketing and pigeonhole distribution in order to calculate the maximum gap efficiently.
+
+I can easily find the maximum difference within the whole range of elements if the whole is divided into buckets and the minimum and maximum values within one bucket are treated with linear time complexity.
+
+It further elaborated on how to design a solution that understands how to handle edge cases, for example, very few elements in arrays or all elements in arrays being the same, in order to design a correct and efficient solution. It also further helps check the limits presented by the problem, for example, the size of the input array that could make the algorithm more optimized.
+
+One area of this work that can be improved is the approach followed for the determination of the maximum gap. That is to say, it considers either the other strategies of the bucket or the sorting strategies to further gain efficiency or apply in the scenarios of their use. Apart from that, time complexity implications of various approaches would help in solving problems efficiently.
+
+In short, this question is in fact attempting to bring out valuable insights into techniques of bucketing and reiterates the need to keep the constra
+         */
 
         /*
 
@@ -494,6 +561,18 @@ namespace ISM6225_Spring_2024_Assignment_2
                 throw;
             }
         }
+        /*
+         self reflection: Given an array A of positive integers, find a maximum value of the perimeter that can be obtained from a triangle having elements of the array as its sides. In this problem, I needed to search exhaustively to find valid triangles in the most efficient way. I needed to sort the array in non-decreasing order and then traverse to see what a valid side for a triangle would be, whereby I'd be able to do the needful to find out the largest possible perimeter.
+
+And that is, understanding how such edge cases are to be handled, like in the case of arrays that contain fewer elements than are necessary for forming a valid triangle combination, and many others would help in coming up with a proper and efficient solution.
+
+In order to help optimize the performance of this algorithm, we considered a range of constraints, such as the size of the input array and the range within which the integers can take values.
+
+Where I possibly could have done better is in exploring other methods that may lead to finding valid combinations of triangles; for example, looking at sorting methods or some mathematical properties of triangles that may likely eliminate some redundancies or make the code more generic. In addition, the ability to deduce time complexity implications over those alternatives will help in solving similar problems better.
+
+In all, this question gave very good practice for finding valid combinations and reinforced how important problem constraints are when designing algorithms for obtaining an efficient solution.
+
+         */
 
         /*
 
@@ -559,6 +638,13 @@ namespace ISM6225_Spring_2024_Assignment_2
                 throw;
             }
         }
+
+        /*Self-Reflection:
+
+One was to remove all occurrences of a given substring from a supplied string. It required very efficient techniques of string manipulation, as it was supposed to process successively the supplied string for removing all occurrences of the substring from it. I used the IndexOf function and string manipulation techniques, so I was able to remove it in place without taking extra space.
+
+It was very important in order to understand the handlings of some edge cases: either strings of different length or substrings of different occurrence, in coming up with the correct and optimal solution design. Further, the given constraints of the problem also helped optimize the performance of the algorithm through input string length consideration. An area where I may improve would be considering experimenting with various methods of removing substrings from the regular expression or string slicing approach where possible, if they are going to prove more efficient or come out with different kinds of scenarios. Understandably, time complexity implications would be quite important to be much more efficient in this regard for many other similar problems in problem-solving. All in all, this question was quite a good exercise to practice string-manipulation techniques and emphasized well how important it is to take into account the constraints of a problem to come up with algorithms. After these are self-reflections on the major learnings and considerations of each question, revealing strategies of problem-solving and principles of algorithm design.
+         */
 
         /* Inbuilt Functions - Don't Change the below functions */
         static string ConvertIListToNestedList(IList<IList<int>> input)
